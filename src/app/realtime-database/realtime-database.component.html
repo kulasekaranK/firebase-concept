@@ -1,0 +1,45 @@
+<div class="container col-sm-12 col-md-7 col-lg-5">
+    <h2 class="text-center mt-3">Contact</h2>
+<button class="btn ms-2 btn-primary m-3" data-bs-toggle="modal" data-bs-target="#modal"><h1><i class="bi bi-person-fill-add"></i></h1></button>
+<div class="modal  " id="modal">
+    <div class="modal-dialog">
+        <div class="modal-content p-5">
+            <div class="modal-header">
+                <h1><i class="bi bi-person-lines-fill"></i> Create Contact </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label class="form-label mt-1" for="fname">First Name</label>
+                    <input class="form-control mt-1" type="text" name="fname" id="name" [(ngModel)]="fname">
+                    <label class="form-label mt-1" for="lname">Last Name</label>
+                    <input class="form-control mt-1" type="text" name="lname" id="name" [(ngModel)]="lname">
+                    <label class="form-label mt-1" for="phoneNumber">Phone Number</label>
+                    <input class="form-control mt-1" type="text" name="phoneNumber" id="phoneNumber" [(ngModel)]="phoneNumber">
+                    <label class="form-label mt-1" for="email">Email</label>
+                    <input class="form-control mt-1" type="text" name="email" id="email" [(ngModel)]="email">
+                  
+                </form>
+            </div>
+            <div class="modal-fooder">
+                <button (click)="add()" data-bs-dismiss="modal" class="btn btn-primary d-block ms-auto mb-3 me-3">Save</button>  
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card mb-2 rounded-5"  *ngFor="let contact of contacts">
+    <div class="card-body d-flex flex-column flex-lg-row justify-content-between align-items-center">
+        <div>
+        <h3>{{contact.fname}} {{contact.lname}}</h3>
+        <p><i class="bi bi-telephone-fill"></i> +91 {{contact.phoneNumber}}</p>
+    
+        </div>
+        <div>
+            <button class="btn d-block ms-auto" (click)="remove(contact.fname)"><h3><i class="bi bi-person-x"></i></h3></button>
+        <p><i class="bi bi-envelope-fill"></i> {{contact.email}}</p>
+        
+        </div>
+
+    </div>
+</div>
+</div>

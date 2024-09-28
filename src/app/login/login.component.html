@@ -1,0 +1,47 @@
+<div class="bg-light position-relative" style="background-image: url('loginbackground.png'); background-size: cover; background-attachment: fixed; height: 100vh;">
+<div class="container d-flex justify-content-center ">
+    <form
+      (ngSubmit)="onLogin()"
+      class="col-12 col-md-8 col-lg-4 border p-4 bg-white rounded-4 shadow mt-5"
+    >
+    <img src="logo.png" alt="logo" width="50px" class=" mb-4 d-block mx-auto">
+      <h1 class="text-center mb-4">Login</h1>
+      <p class="alert alert-danger" *ngIf="message">
+        {{message}}
+      </p>
+      <div class="form-group">
+        <label class="form-label" for="email">Email</label>
+        <input
+          class="form-control"
+          type="email"
+          name="email "
+          id="email"
+          [(ngModel)]="email"
+        />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <input
+          class="form-control"
+          type="email"
+          name="email "
+          id="password"
+          [(ngModel)]="password"
+        />
+        <a class="fs-6 text-black fw-light  ms-2" routerLink="/reset-password">Forget Password?</a>
+      </div>
+      <button class="btn btn-dark d-block mx-auto mt-3" type="submit">
+        Login
+      </button>
+      <p class="text-center mt-3 mb-5">Don't have an account? <a routerLink="/register">Register</a></p>
+      
+      <hr>
+      
+      <button class="btn border rounded-pill shadow-sm d-block mx-auto w-75 mt-2 " type="button" (click)="onGoogle()">Continue With <i class="bi bi-google"></i> </button>
+      <button class="btn border rounded-pill shadow-sm d-block mx-auto w-75 mt-2 " type="button" (click)="onFacebook()" >Continue With <i class="bi bi-facebook"></i> </button>
+    
+     
+    </form>
+    </div>
+  </div>
+  

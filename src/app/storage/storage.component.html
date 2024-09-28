@@ -1,0 +1,38 @@
+<div class="container d-flex flex-column align-items-center">
+  <h1 class="my-5">Gallery</h1>
+  <form class="border p-3 rounded-4" (ngSubmit)="upload(fileInput)">
+    <input
+      type="file"
+      name="file"
+      id="file"
+      class="form-control"
+      #fileInput
+      (change)="selectFile($event)"
+    />
+    <button
+      type="button"
+      class="btn btn-primary d-block ms-auto me-3 mt-2"
+      (click)="upload(fileInput)"
+    >
+      Upload
+    </button>
+  </form>
+</div>
+
+<div class="row mt-5 container-fluid d-flex justify-content-center">
+  <div class="card col-3 m-4" *ngFor="let file of files$ | async">
+    <img [src]="file.url" alt="" class="w-100 h-100" />
+    <hr />
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <h5>{{ file.name }}</h5>
+        <div class="d-flex align-items-center">
+          <button class="btn" (click)="delete(file)"><i class="bi bi-trash3"></i></button>
+          <a [href]="file.url" class="text-decoration-none text-black">
+            <i class="bi bi-cloud-download"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

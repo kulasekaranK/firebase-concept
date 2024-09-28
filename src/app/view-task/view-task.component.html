@@ -1,0 +1,132 @@
+<div
+  class="bg-light position-relative"
+  style="
+    background-image: url('loginbackground.png');
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+  "
+>
+  <div class="container d-flex flex-column align-items-center">
+    <img src="Task-Master.png" alt="Title" class="my-3" />
+    <div
+      class="bg-secondary col-12 vh-75 px-2 px-lg-5 pb-5 shadow overflow-auto rounded-5"
+    >
+      <div class="mt-5 d-flex justify-content-between">
+        <button type="button" class="btn btn-dark" routerLink="/add-task">
+          Add Task <i class="bi bi-plus-circle"></i>
+        </button>
+
+        <div>
+          @if(users.photoURL){
+          <img
+            [src]="users.photoURL"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvas"
+            alt="User profile picture"
+            class="img-fluid w-50 rounded-circle"
+          />
+          } @else {
+          <img
+            src="user.jpg"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvas"
+            alt="User profile picture"
+            class="img-fluid rounded-circle"
+            width="50px"
+          />
+
+          }
+
+          <div class="offcanvas offcanvas-end" id="offcanvas">
+            <div class="offcanvas-header">
+           
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="offcanvas-body">
+              @if(users.photoURL){
+              <img
+                [src]="users?.photoURL"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvas"
+                alt="User profile picture"
+                class="img-fluid w-50 d-block mx-auto rounded-circle"
+              />
+              <h3 class="text-center mt-4">{{ users.displayName }}</h3>
+              <p class="text-center">{{ users.email }}</p>
+              } @else {
+              <img
+                src="user.jpg"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvas"
+                alt="User profile picture"
+                class="img-fluid rounded-circle d-block mx-auto"
+                width="150px"
+              />
+              <div *ngFor="let luser of user | async">
+                <h3 class="text-center mt-4">{{ luser.name }}</h3>
+                <p class="text-center">{{ luser.email }}</p>
+              </div>
+              }
+              <button
+                class="btn btn-dark d-block mx-auto mt-5"
+                (click)="logOut()"
+              >
+                LogOut
+              </button>
+
+
+              <div class="mt-5 d-flex flex-column align-items-center">
+                <a routerLink="/storage" class="text-decoration-none text-center text-black border p-2 rounded">Storage</a>
+                <a routerLink="/realtime-database" class="text-decoration-none text-center text-black border p-2 rounded mt-3">Realtime Database</a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+
+      <div
+        class="card col-sm-12 col-md-10 col-lg-8 m-3 shadow d-block mx-auto rounded-4 bg-light"
+        *ngFor="let task of tasks | async"
+      >
+        <div class="card-body">
+          <h3>{{ task.title }}</h3>
+          <p>{{ task.description }}</p>
+          <hr />
+          <p><i class="bi bi-calendar-event"></i> {{ task.duedate | date }}</p>
+          <div
+            class="d-flex justify-content-between align-items-center flex-warp"
+          >
+            <div class="d-flex flex-column flex-lg-row">
+              <button
+                class="btn btn-dark ms-4 mt-3 btn-sm"
+                (click)="editTask(task)"
+              >
+                <i class="bi bi-pencil-fill"></i> Edit
+              </button>
+              <button
+                class="btn btn-dark ms-4 mt-3 btn-sm"
+                (click)="deleteTask(task)"
+              >
+                <i class="bi bi-trash3-fill"></i> Delete
+              </button>
+            </div>
+            <div class="me-4">
+              <p class="badge text-bg-warning">{{ task.status }}</p>
+              <button class="btn btn-primary ms-3" (click)="statusUpdate(task)" [ngClass]="{'d-none':task.status === 'Completed'}" >
+                <i class="bi bi-check-circle-fill"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

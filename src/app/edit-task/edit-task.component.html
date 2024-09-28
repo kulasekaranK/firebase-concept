@@ -1,0 +1,65 @@
+<div
+  class="bg-light position-relative"
+  style="
+    background-image: url('loginbackground.png');
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+  "
+>
+<div class="container d-flex flex-column align-items-center">
+    <img src="Task-Master.png" alt="Title" class="my-3">
+  
+    <form #f="ngForm" class="mt-4 border col-sm-12 col-lg-6  p-4 shadow rounded-4 bg-white">
+        <h2 class="text-center mb-4">Edit Task</h2>
+      <div class="form-group" *ngIf="task$ | async as task">
+        <label class="form-label" for="title">Title</label>
+        <input
+          class="form-control mb-1"
+          type="text"
+          name="title"
+          id="title"
+          [(ngModel)]="task.title"
+          required
+          ngModel
+        />
+      </div>
+      <div class="form-group" *ngIf="task$ | async as task">
+        <label class="form-label" for="description">Description</label>
+        <input
+          class="form-control mb-1"
+          type="text"
+          name="description"
+          id="description"
+          [(ngModel)]="task.description"
+          required
+          ngModel
+        />
+      </div>
+      <div class="form-group" *ngIf="task$ | async as task">
+        <label class="form-label" for="dueDate">Due Date</label>
+        <input
+          class="form-control"
+          type="datetime-local"
+          name="dueDate"
+          id="dueDate"
+          [(ngModel)]="task.dueDate"
+          required
+          ngModel
+        />
+      </div>
+      <div class="d-flex mt-3 justify-content-between">
+        <button class="btn btn-secondary" routerLink="/">Back</button>
+        <button
+          class="btn btn-dark d-block"
+          type="button"
+          [disabled]="f.invalid"
+          (click)="update(f)"
+        >
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+  </div>
+  
